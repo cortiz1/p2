@@ -66,7 +66,8 @@ void fcfs(process *ptr)
                 q_idle_time = (-1) * c_proc->remaining_runtime;
                 c_proc->remaining_runtime = 0;
                 turnaround_time += i - c_proc->arrival_time;
-		waiting_time += turnaround_time - c_proc->expected_runtime;
+		int current_turnaround = i - c_proc->arrival_time;
+		waiting_time += current_turnaround - c_proc->expected_runtime;
             }
 
             // Print the process id and its remaining runtime
