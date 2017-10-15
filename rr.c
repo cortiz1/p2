@@ -1,7 +1,7 @@
 #include "rr.h"
 
 
-//Get index of the last served process
+// Get index of the last served process
 int get_index(process* ptr, int last_serviced)
 {
     for (int i=0; i< NUMBER_OF_PROCS; i++){
@@ -83,6 +83,7 @@ int rr(process *ptr)
             if (c_proc->expected_runtime == c_proc->remaining_runtime){
                 response_time += i - c_proc->arrival_time;
             }
+	    // Increment done_procs to handle unfinished procs that started before 100
             if(c_proc->expected_runtime == c_proc->remaining_runtime && i>=QUANTA-1){
                 done_procs++;
             }
@@ -126,7 +127,7 @@ int rr(process *ptr)
 
     int proc_cnt = 0;
     int total_quanta = i;
-
+    // Get the number of finished procs
     for (i=0; i< NUMBER_OF_PROCS; i++){
         if (ptr[i].remaining_runtime > 0){
             proc_cnt ++;
