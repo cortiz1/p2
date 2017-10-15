@@ -51,6 +51,8 @@ void fcfs(process *ptr)
             if (c_proc->expected_runtime == c_proc->remaining_runtime){
                 response_time += i - c_proc->arrival_time;
             }
+	    // Break loop when we get a process that may have started before 100 and 
+	    // has completed now
             if(c_proc->expected_runtime == c_proc->remaining_runtime && i>=QUANTA-1){
                 done_procs++;
                 break;
@@ -91,14 +93,14 @@ void fcfs(process *ptr)
 
     int proc_cnt = 0;
     int total_quanta = i;
-
+    // Get the number of completed processes
     for (i=0; i< NUMBER_OF_PROCS; i++){
         if (ptr[i].remaining_runtime > 0){
             proc_cnt ++;
             printf("pid:%d remaining time: %f\n", ptr[i].pid, ptr[i].remaining_runtime);
         }
     }
-
+    // Print un finished processes
     printf("\n%d processes left un-finished after %d QUANTA\n", proc_cnt, total_quanta);
     if (proc_cnt == 0){
         printf("All procs finished after %d QUANTA\n", total_quanta);
